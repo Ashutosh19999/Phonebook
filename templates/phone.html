@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone-Book</title>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Contact-Book</h1>
+    <form style="position: absolute;left:600px" action="addcontact" method="post">
+        {% csrf_token %}
+        <label>Name:</label><input type="text" name="Name" style="position: absolute;left:70px">
+        <br>
+        <br>
+        <label style="position:absolute;left:-15px">MobileNo:</label><input type="number" name="Mobileno" style="position:absolute;left:70px">
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="Add Contact" style="position: absolute;left:70px">
+        <p style="position: absolute;bottom:-80px;width:200px">{{msg}}</p>
+    </form>
+
+    <form style="position: absolute;left:600px;bottom:250px" action="displaycontact" method="post">
+        {% csrf_token %}
+        <table border="1" style="position: absolute;left:20px;width:200px;bottom:-60px">
+            <tr>
+                <td>Name</td>
+                <td>Mobile-Number</td>
+            </tr>
+            <tr>
+                {% for i in contact %}
+                <td>{{i.name}}</td>
+                <td>{{i.mobileno}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Display Contacts" style="position: absolute;left:60px;bottom:100px">
+    </form>
+    <br>
+    <br>
+    <form style="position: absolute;left:600px;bottom:70px" action="deletecontact" method="post">
+        {% csrf_token %}
+        <label style="position:absolute;left:50px;bottom:-5px;">Name:</label><input type="text" name="Name" style="position:absolute;left:110px;bottom:-5px;">
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="Delete Contact" style="position: absolute;left:70px;bottom:-80px">
+        <p style="position: absolute;bottom:-120px;width:200px;left:30px">{{msg2}}</p>
+    </form>
+    <br>
+    <br>
+    <form style="position: absolute;left:600px;bottom:-300px" action="updatecontact" method="post">
+        {% csrf_token %}
+        <label>Oldname:</label><input type="text" name="oldname" style="position: absolute;left:100px;">
+        <br>
+        <br>
+        <label>Newname:</label><input type="text" name="newname" style="position: absolute;left:100px;">
+        <br>
+        <br>
+        <label>Oldnumber:</label><input type="number" name="oldnumber" style="position: absolute;left:100px;">
+        <br>
+        <br>
+        <label>Newnumber:</label><input type="number" name="newnumber" style="position: absolute;left:100px;">
+        <br>
+        <br>
+        <input type="submit" name="btn" value="Update name">
+        <input type="submit" name="btn" value="Update number" style="position: absolute; left:100px">
+        <br>
+        <p style="position: absolute;bottom:-50px;width:200px;left:30px">{{msg3}}</p>
+    </form>
+</body>
+
+</html>
